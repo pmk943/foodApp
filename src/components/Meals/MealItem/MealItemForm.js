@@ -1,7 +1,13 @@
 import Input from '../../UI/Input';
 import classes from './MealItemForm.module.css';
+import Button from '../../UI/Button'
 
 const MealItemForm = (props) => {
+
+  const onButtonSubmit=(event)=>{
+    event.preventDefault()
+    console.log("button is clicked")
+  }
   return (
     <form className={classes.form}>
       <Input
@@ -15,7 +21,7 @@ const MealItemForm = (props) => {
           defaultValue: '1',
         }}
       />
-      <button>+ Add</button>
+      <Button name="+ add" onButtonClick={onButtonSubmit} />
     </form>
   );
 };
