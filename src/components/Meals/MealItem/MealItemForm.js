@@ -1,19 +1,29 @@
 import Input from '../../UI/Input';
 import classes from './MealItemForm.module.css';
 import Button from '../../UI/Button'
+import { useContext,useRef } from 'react';
 
-const MealItemForm = (props) => {
+import CartContext from '../../../Store/cartContext';
 
-  const onButtonSubmit=(event)=>{
-    event.preventDefault()
-    console.log("button is clicked")
+
+const MealItemForm = ({id, addTocartHandler}) => {
+  const Inputref =useRef()
+
+
+  const onFormSubmit=(event)=>{
+
+    event.preventDefault();
+    addTocartHandler(parseInt(Inputref.current.value));
+  
   }
+ 
   return (
-    <form className={classes.form}>
+    <form className={classes.form} onSubmit={onFormSubmit}>
       <Input
+        ref={Inputref}
         label='Amount'
         input={{
-          id: 'amount_' + props.id,
+          id: 'amount_' + id,
           type: 'number',
           min: '1',
           max: '5',
@@ -21,7 +31,7 @@ const MealItemForm = (props) => {
           defaultValue: '1',
         }}
       />
-      <Button name="+ add" onButtonClick={onButtonSubmit} />
+      <Button name="+ add"  />
     </form>
   );
 };
